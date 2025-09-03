@@ -15,4 +15,7 @@ print(df.isnull().sum())
 df.drop('CustomerID', axis=1, inplace = True)
 print("\nDropped 'CustomerID' column. First 5 rows now:")
 print(df.head())
-      
+df['Churn Value'] = df['Churn Value'].apply(lambda x: 1 if x == 'Yes' else 0)
+df_processed = pd.get_dummies(df, drop_first=True)
+print("\nData after converting text columns into numbers (One-Hot Encoding):")
+print(df_processed.head())
