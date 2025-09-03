@@ -1,0 +1,18 @@
+import pandas as pd
+df = pd.read_excel("data/Telco_customer_churn.xlsx")
+print ("First 5 rows of the data")
+print(df.head())
+print("\nInformation about the dataset:")
+df.info()
+print("\nStatistical summary of numerical coloumns:")
+print(df.describe())
+df['Total Charges'] = pd.to_numeric(df['Total Charges'], errors = 'coerce')
+print("\nMissing values after cleaning 'Total Charges':")
+print(df.isnull().sum())
+df['Total Charges'].fillna(df['Total Charges'].median(), inplace=True)
+print("\nMissing values after filling:")
+print(df.isnull().sum())
+df.drop('CustomerID', axis=1, inplace = True)
+print("\nDropped 'CustomerID' column. First 5 rows now:")
+print(df.head())
+      
